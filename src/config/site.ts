@@ -57,7 +57,7 @@ export const siteConfig = {
   // GitHub API username used to pull live repo/activity data in the
   // "Code & Open Source" section. Leave as-is and it'll show instructions
   // to configure it instead of guessing a username.
-  githubUsername: 'YOUR_GITHUB_USERNAME',
+  githubUsername: 'kavin00111',
 
   // Path to your resume file. Drop a PDF at public/resume.pdf and this
   // will just work — no code changes needed.
