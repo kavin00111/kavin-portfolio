@@ -80,9 +80,7 @@ build command `npm run build`.
 
 ## Before you publish — checklist
 
-- [ ] Replace `YOUR_EMAIL`, `YOUR_GITHUB_URL`, `YOUR_LINKEDIN_URL`, `YOUR_INSTAGRAM_URL`
-      in `src/config/site.ts`
-- [ ] Set `githubUsername` in `src/config/site.ts`
+
 - [ ] Replace `public/resume.pdf` with your real resume
 - [ ] Replace `public/og-image.png` with a real social preview image (optional)
 - [ ] Wire up the contact form to a real backend (see `src/sections/Contact.tsx`)

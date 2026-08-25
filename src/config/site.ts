@@ -48,10 +48,10 @@ export const siteConfig = {
 
   // ---- Replace these placeholders with your real links ----
   links: {
-    email: 'YOUR_EMAIL',
-    github: 'YOUR_GITHUB_URL',
-    linkedin: 'YOUR_LINKEDIN_URL',
-    instagram: 'YOUR_INSTAGRAM_URL',
+    email: 'Developerkavinxx@gmail.com',
+    github: 'https://github.com/kavin00111',
+    linkedin: 'https://www.linkedin.com/in/kavin-chaudhary-7b7392306?utm_source=share_via&utm_content=profile&utm_medium=member_android',
+    instagram: 'https://www.instagram.com/kvinkx7.npc?igsi=MWgyMHJjam56ZG5tcg==',
   },
 
   // GitHub API username used to pull live repo/activity data in the
