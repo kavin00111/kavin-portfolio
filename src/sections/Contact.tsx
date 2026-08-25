@@ -20,7 +20,18 @@ interface FormErrors {
   message?: string
 }
 
+interface EmailJsConfig {
+  serviceId: string
+  templateId: string
+  publicKey: string
+}
+
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+const EMAILJS_ENDPOINT = 'https://api.emailjs.com/api/v1.0/email/send'
+
+function formatMessageWithSubject(subject: string, message: string) {
+  return `Subject: ${subject}\n\n${message}`
+}
 
 function validate(values: FormState): FormErrors {
   const errors: FormErrors = {}
@@ -50,23 +61,55 @@ export default function Contact() {
   const [values, setValues] = useState<FormState>({ name: '', email: '', subject: '', message: '' })
   const [errors, setErrors] = useState<FormErrors>({})
   const [submitted, setSubmitted] = useState(false)
+  const [isSending, setIsSending] = useState(false)
+  const [submitError, setSubmitError] = useState('')
 
   const handleChange = (field: keyof FormState) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setValues((v) => ({ ...v, [field]: e.target.value }))
   }
 
-  const handleSubmit = (e: FormEvent) => {
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
     const newErrors = validate(values)
     setErrors(newErrors)
+    setSubmitError('')
     if (Object.keys(newErrors).length > 0) return
 
-    // NOTE: No email backend is connected yet. Wire this up to a service
-    // like Formspree, EmailJS, or your own API route, then replace this
-    // block with the real submit call.
-    console.info('Contact form submitted (no backend connected yet):', values)
-    setSubmitted(true)
-    setValues({ name: '', email: '', subject: '', message: '' })
+    const { serviceId, templateId, publicKey } = siteConfig.emailjs as EmailJsConfig
+
+    setIsSending(true)
+    try {
+      const response = await fetch(EMAILJS_ENDPOINT, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          service_id: serviceId,
+          template_id: templateId,
+          user_id: publicKey,
+          template_params: {
+            from_name: values.name,
+            from_email: values.email,
+            reply_to: values.email,
+            subject: values.subject,
+            message: formatMessageWithSubject(values.subject, values.message),
+            name: values.name,
+            email: values.email,
+            title: values.subject,
+          },
+        }),
+      })
+
+      if (!response.ok) {
+        throw new Error(`Email service request failed (${response.status})`)
+      }
+
+      setSubmitted(true)
+      setValues({ name: '', email: '', subject: '', message: '' })
+    } catch (error) {
+      setSubmitError(error instanceof Error ? error.message : 'Failed to send your message.')
+    } finally {
+      setIsSending(false)
+    }
   }
 
   return (
@@ -116,8 +159,7 @@ export default function Contact() {
                 <CheckCircle2 className="text-signal" size={32} />
                 <p className="font-display text-lg font-semibold text-mist">Message ready to send</p>
                 <p className="max-w-sm text-sm text-mist-dim">
-                  Your message passed validation. Connect a backend (Formspree, EmailJS, or your own
-                  API route) to actually deliver it.
+                  Your message was sent through EmailJS successfully. The subject is included in the message body too.
                 </p>
                 <button onClick={() => setSubmitted(false)} className="btn-ghost mt-2">
                   Send another message
@@ -209,9 +251,15 @@ export default function Contact() {
                   )}
                 </div>
 
+                {submitError && (
+                  <p className="text-sm text-red-400" role="alert" aria-live="polite">
+                    {submitError}
+                  </p>
+                )}
+
                 <button type="submit" className="btn-primary w-full sm:w-auto">
                   <Send size={16} />
-                  Send Message
+                  {isSending ? 'Sending...' : 'Send Message'}
                 </button>
               </form>
             )}

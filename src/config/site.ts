@@ -53,7 +53,12 @@ export const siteConfig = {
     linkedin: 'https://www.linkedin.com/in/kavin-chaudhary-7b7392306',
     instagram: 'https://www.instagram.com/kvinkx7.npc',
   },
-
+  //Contact form shit
+  emailjs: {
+  serviceId: 'service_wnuygxd',
+  templateId: 'template_rj9vakp',
+  publicKey: 'BlV9JP-2cU25eSEFK',
+  },
   // GitHub API username used to pull live repo/activity data in the
   // "Code & Open Source" section. Leave as-is and it'll show instructions
   // to configure it instead of guessing a username.

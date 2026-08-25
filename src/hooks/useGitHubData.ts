@@ -25,12 +25,12 @@ interface GitHubDataState {
 }
 
 export function useGitHubData(username: string) {
-  const [state, setState] = useState<GitHubDataState>({
+  const [state, setState] = useState<GitHubDataState>(() => ({
     profile: null,
     repos: [],
-    status: 'idle',
+    status: isPlaceholder(username) ? 'idle' : 'loading',
     errorMessage: null,
-  })
+  }))
 
   useEffect(() => {
     if (isPlaceholder(username)) {
@@ -38,7 +38,6 @@ export function useGitHubData(username: string) {
     }
 
     let cancelled = false
-    setState((s) => ({ ...s, status: 'loading', errorMessage: null }))
 
     async function load() {
       try {

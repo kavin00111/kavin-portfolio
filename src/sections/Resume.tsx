@@ -7,6 +7,8 @@ import { projects } from '../data/projects'
 import { isPlaceholder } from '../lib/placeholder'
 
 export default function Resume() {
+  const previewSkills = Array.from(new Set(skillCategories.flatMap((c) => c.skills))).slice(0, 16)
+
   return (
     <section id="resume" className="section-pad bg-void-100/40">
       <div className="container-page">
@@ -33,14 +35,11 @@ export default function Resume() {
                   Technical Skills
                 </h3>
                 <div className="flex flex-wrap gap-2">
-                  {skillCategories
-                    .flatMap((c) => c.skills)
-                    .slice(0, 16)
-                    .map((s) => (
+                  {previewSkills.map((s) => (
                       <span key={s} className="tag">
                         {s}
                       </span>
-                    ))}
+                  ))}
                 </div>
               </div>
 
