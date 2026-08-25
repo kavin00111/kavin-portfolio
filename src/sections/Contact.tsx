@@ -91,16 +91,16 @@ export default function Contact() {
                     target={label !== 'Email' ? '_blank' : undefined}
                     rel={label !== 'Email' ? 'noreferrer' : undefined}
                     aria-disabled={!configured}
-                    className={`flex items-center gap-3 rounded-lg border border-white/[0.06] px-4 py-3 transition-colors ${
+                    className={`flex items-start gap-3 rounded-lg border border-white/[0.06] px-4 py-3 transition-colors ${
                       configured
                         ? 'hover:border-cyan-glow/30 hover:bg-cyan-glow/[0.04]'
                         : 'opacity-50'
                     }`}
                   >
                     <Icon size={18} className="text-cyan-glow" />
-                    <div>
+                    <div className="min-w-0 flex-1">
                       <p className="font-mono text-xs text-mist-faint">{label}</p>
-                      <p className="text-sm text-mist">
+                      <p className="break-all text-sm text-mist">
                         {configured ? value : `Add your ${label.toLowerCase()} in config/site.ts`}
                       </p>
                     </div>
