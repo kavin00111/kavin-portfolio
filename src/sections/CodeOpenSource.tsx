@@ -1,4 +1,5 @@
-import { Github, Star, ExternalLink } from 'lucide-react'
+import { Star, ExternalLink } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import { siteConfig } from '../config/site'
@@ -28,7 +29,7 @@ export default function CodeOpenSource() {
             className={`btn-secondary ${!githubLinkConfigured ? 'pointer-events-none opacity-50' : ''}`}
             aria-disabled={!githubLinkConfigured}
           >
-            <Github size={16} />
+            <FaGithub size={16} />
             {githubLinkConfigured ? 'View GitHub Profile' : 'Add your GitHub URL'}
           </a>
 

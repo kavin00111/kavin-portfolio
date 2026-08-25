@@ -1,4 +1,4 @@
-import { Github, Linkedin, Instagram, Mail } from 'lucide-react'
+import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import { siteConfig } from '../config/site'
 import { isPlaceholder } from '../lib/placeholder'
 
@@ -6,11 +6,11 @@ export default function Footer() {
   const year = new Date().getFullYear()
 
   const socials = [
-    { icon: Github, href: siteConfig.links.github, label: 'GitHub' },
-    { icon: Linkedin, href: siteConfig.links.linkedin, label: 'LinkedIn' },
-    { icon: Instagram, href: siteConfig.links.instagram, label: 'Instagram' },
+    { icon: FaGithub, href: siteConfig.links.github, label: 'GitHub' },
+    { icon: FaLinkedin, href: siteConfig.links.linkedin, label: 'LinkedIn' },
+    { icon: FaInstagram, href: siteConfig.links.instagram, label: 'Instagram' },
     {
-      icon: Mail,
+      icon: FaEnvelope,
       href: isPlaceholder(siteConfig.links.email) ? undefined : `mailto:${siteConfig.links.email}`,
       label: 'Email',
     },

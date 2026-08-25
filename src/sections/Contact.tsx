@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from 'react'
-import { Github, Linkedin, Instagram, Mail, Send, CheckCircle2 } from 'lucide-react'
+import { Send, CheckCircle2 } from 'lucide-react'
+import { FaEnvelope, FaGithub, FaInstagram, FaLinkedin } from 'react-icons/fa'
 import SectionHeading from '../components/SectionHeading'
 import Reveal from '../components/Reveal'
 import { siteConfig } from '../config/site'
@@ -39,10 +40,10 @@ function validate(values: FormState): FormErrors {
 }
 
 const socialLinks = [
-  { icon: Mail, label: 'Email', value: siteConfig.links.email, href: (v: string) => `mailto:${v}` },
-  { icon: Github, label: 'GitHub', value: siteConfig.links.github, href: (v: string) => v },
-  { icon: Linkedin, label: 'LinkedIn', value: siteConfig.links.linkedin, href: (v: string) => v },
-  { icon: Instagram, label: 'Instagram', value: siteConfig.links.instagram, href: (v: string) => v },
+  { icon: FaEnvelope, label: 'Email', value: siteConfig.links.email, href: (v: string) => `mailto:${v}` },
+  { icon: FaGithub, label: 'GitHub', value: siteConfig.links.github, href: (v: string) => v },
+  { icon: FaLinkedin, label: 'LinkedIn', value: siteConfig.links.linkedin, href: (v: string) => v },
+  { icon: FaInstagram, label: 'Instagram', value: siteConfig.links.instagram, href: (v: string) => v },
 ]
 
 export default function Contact() {

@@ -1,4 +1,5 @@
-import { Github, ExternalLink, CircleDot } from 'lucide-react'
+import { ExternalLink, CircleDot } from 'lucide-react'
+import { FaGithub } from 'react-icons/fa'
 import type { Project } from '../data/projects'
 import { isPlaceholder } from '../lib/placeholder'
 
@@ -56,7 +57,7 @@ export default function ProjectCard({ project }: { project: Project }) {
           }`}
           title={hasGithub ? 'View source on GitHub' : 'Add your GitHub link in config/site.ts'}
         >
-          <Github size={14} /> Source
+          <FaGithub size={14} /> Source
         </a>
         {hasLive && (
           <a
